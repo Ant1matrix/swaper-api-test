@@ -30,8 +30,24 @@ describe("Swaper API Test", () => {
     const response = await axiosInit.post("rest/public/login", userLoginData);
     const data: DataResponse = response.data;
 
-    expect(response.status).toBe(200); // Expecting a 200 status code
+    expect(response.status).toBe(200);
     expect(Object.keys(data)).toEqual(expectedKeys);
     expect(data.accountBalance).toBe(0.0);
+  });
+
+  it("should throw error when logging in with wrong credentials", async () => {
+    let result;
+    const invalidUserData: DataPost = {
+      name: "UserInv",
+      password: "PassInv",
+    };
+
+    try {
+      await axiosInit.post("rest/public/login", invalidUserData);
+    } catch (response) {
+      result = response;
+      console.log("Error appears as expected:", result.message)
+    }
+     expect(result.message).toBe("Request failed with status code 400");
   });
 });
