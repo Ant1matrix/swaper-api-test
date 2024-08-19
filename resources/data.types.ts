@@ -31,4 +31,10 @@ export interface DataResponse {
     isDeleteRequestAllowed: boolean;
     isShowProductTypePopup: boolean;
     id: number;
-  }
+  };
+
+
+  export interface DataPost {
+    name: string;
+    password: string;
+  };
